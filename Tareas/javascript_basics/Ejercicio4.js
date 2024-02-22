@@ -21,9 +21,31 @@ function cap(text)
     return newtext;
 }
 
-let text = "hola como estas Yo estoy Bien";
+let text = "hola como estas";
 
-console.log("Antes de capitalizar: ");
+console.log("Case 1:\nAntes de capitalizar: ");
+console.log(text);
+
+text = cap(text);
+
+console.log("Despues de capitalizar: ");
+console.log(text);
+
+
+text = "Hola soy tomas Molina";
+
+console.log("Case 2:\nAntes de capitalizar: ");
+console.log(text);
+
+text = cap(text);
+
+console.log("Despues de capitalizar: ");
+console.log(text);
+
+
+text = " a b c d e f g A";
+
+console.log("Case 3:\nAntes de capitalizar: ");
 console.log(text);
 
 text = cap(text);

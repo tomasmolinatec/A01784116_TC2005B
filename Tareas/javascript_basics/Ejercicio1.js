@@ -30,13 +30,19 @@ function seRepite(string, index) {
 }
 
 
-console.log("Usando abacddbec: ")
-let test = 'abacddbec';
+let test = 'abc';
+console.log("Case 1:\nPrimer caracter no reptetido en ", test);
 
 console.log(primeraCaracterNoRepetido(test));
 
-
-console.log("Usando abbccdde: ")
-test = 'abbccdde';
+test = 'aabcce';
+console.log("Case 2:\nPrimer caracter no reptetido en ", test);
 
 console.log(primeraCaracterNoRepetido(test));
+
+test = 'aabbccdde';
+console.log("Case 3:\nPrimer caracter no reptetido en ", test);
+
+
+console.log(primeraCaracterNoRepetido(test));
+
