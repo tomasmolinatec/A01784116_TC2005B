@@ -87,21 +87,70 @@ app.post("/api/agregarcartas", (req, resp) =>{
 })
 
 app.delete("/api/cartas/:id", (req, resp) =>{
-    let cartaEncontrada = cards.find( card => req.params.id == card.id);
-    //console.log(cartaEncontrada);
-    if (cartaEncontrada != undefined)
+    
+    let index = -1;
+    for(let i = 0; i < cards.length; i++)
     {
-        cards = cards.filter(card => card.id != req.params.id);
-        resp.status(200).send("Se BORRO LA CARTA!");
+        if (cards[i].id == req.params.id)
+        {
+            index = i; 
+            break;
+        }
     }
-    else
-    {
+
+    
+    if (index !== -1) {
+        // Found the item, remove it
+        cards.splice(index, 1);
+        resp.status(200).send(`SE BORRO LA CARTA CON ID: ${req.params.id}`);
+    } else {
+        // Item not found
         resp.status(200).send("NO SE ENCONTRO LA CARTA");
     }
     
     
-
 })
+
+app.put("/api/cartas/:id", (req, resp) =>{
+    
+    const data = req.body;
+    let statusstring = "";
+    
+
+    let index = -1;
+    for(let i = 0; i < cards.length; i++)
+    {
+        if (cards[i].id == req.params.id)
+        {
+            index = i; 
+            break;
+        }
+    }
+
+    if (index == -1)
+    {
+        resp.status(200).send("NO SE ENCONTRO LA CARTA");
+    }
+    else
+    {
+        Object.keys(data).forEach(param =>{
+            if(attributes.includes(param))
+            {
+                cards[index][param] = data[param];
+                statusstring += `El paramentro de ${param} se actualizo!\n`;
+            }
+            else
+            {
+                statusstring += `El paramentro de ${param} no es valido.\n`;
+            }
+        });
+            
+        resp.status(200).send(statusstring);
+    }
+    
+    
+})
+
 
 //Listen
 app.listen(port, ()=>{
