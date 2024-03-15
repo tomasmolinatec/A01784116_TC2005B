@@ -100,11 +100,11 @@ app.delete("/api/cartas/:id", (req, resp) =>{
 
     
     if (index !== -1) {
-        // Found the item, remove it
+       
         cards.splice(index, 1);
         resp.status(200).send(`SE BORRO LA CARTA CON ID: ${req.params.id}`);
     } else {
-        // Item not found
+        
         resp.status(200).send("NO SE ENCONTRO LA CARTA");
     }
     
