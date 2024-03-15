@@ -12,8 +12,13 @@ public class SimonController : MonoBehaviour
     private int currentIndex = 0;
 
     public GameObject gameOverUI;
+    public TextScript scoreScript;
+     public TextScript highScoreScript;
 
     private bool playerTurn = false;
+    private int score = 0;
+    private int highscore = 0;
+
 
     void Start()
     {
@@ -28,7 +33,7 @@ public class SimonController : MonoBehaviour
     IEnumerator SequenceC()
     {
         playerTurn = false;
-        int toAdd = Random.Range(0,3);
+        int toAdd = Random.Range(0,buttons.Count);
         sequence.Add(toAdd);
         //Debug.Log("Random Value: " + toAdd );
         for (int i = 0; i < sequence.Count; i++)
@@ -36,8 +41,8 @@ public class SimonController : MonoBehaviour
             yield return new WaitForSeconds(1);
             buttons[sequence[i]].highlight(0.5f);
         }
-        yield return new WaitForSeconds(1.5f);
-        Flash();
+        yield return new WaitForSeconds(1f);
+        //Flash();
         playerTurn = true;
     }
 
@@ -57,7 +62,10 @@ public class SimonController : MonoBehaviour
             {
                 currentIndex = 0;
                 userSequence = new List<int>();
+                score++;
+                scoreScript.SetText(score.ToString());
                 ShowSequence();
+                
             }
         }
         else
@@ -69,7 +77,11 @@ public class SimonController : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("GameOver!");
+        if (score > highscore)
+        {
+            highscore = score;
+            highScoreScript.SetText("Highscore:\n"+highscore);
+        }
         gameOverUI.SetActive(true);
     }
 
@@ -79,7 +91,10 @@ public class SimonController : MonoBehaviour
         userSequence = new List<int>();
         currentIndex = 0;
         gameOverUI.SetActive(false);
+        score = 0;
+        scoreScript.SetText(score.ToString());
         ShowSequence();
+        
     }
 
     public void Flash()

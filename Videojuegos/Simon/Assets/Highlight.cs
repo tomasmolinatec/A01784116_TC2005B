@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Highlight : MonoBehaviour
 {
     
+    public AudioSource ding;
     public Image image;
     public Color originalColor;
 
@@ -19,7 +20,10 @@ public class Highlight : MonoBehaviour
     public void highlight(float l)
     {   
         length = l;
-         StartCoroutine("HC");
+        Debug.Log("PLAYING SOUND");
+        ding.Play();
+        StartCoroutine("HC");
+        
     }
 
     IEnumerator HC()
